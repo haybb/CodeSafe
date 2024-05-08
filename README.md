@@ -1,7 +1,7 @@
 # CodeSafe
 
 ### Abstract
-Dans le cadre de notre **Projet Pluridisciplinaire d'Informatique Intégrative**,\
+Dans le cadre de notre **Projet Pluridisciplinaire d'Informatique Intégrative** à Télécom Nancy,\
 nous avons décidé de créer un site web interactif à visée éducative :\
 sensibiliser à la sécurité informatique au travers de quizz, test de mots de passe, etc.
 
