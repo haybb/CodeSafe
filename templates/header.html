@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Barre de naviguation </title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                align-items: center;
+            }
+            * {
+                margin:0;
+            }
+            .conteneur {
+                position: relative;
+            }
+
+            .image1 {
+                display: block; 
+                position : relative;
+                z-index:2;
+                width: 200px;
+            }
+            .couleur {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 74px; 
+                background-color: rgb(80, 79, 79); 
+                z-index:1;
+            }
+            .ligne {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: black;
+                z-index:1;
+            }
+            .image2 {
+                position:absolute;
+                z-index:2;
+                width: 80px;
+                top:-2px;
+                right:1px;
+            }
+            .bouton1 {
+                display:inline-block;
+                position: absolute;
+                top:15px;
+                right:20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                border: 2px solid #ffffff;
+                border-radius: 5px;
+                color: #ffffff;
+                background-color: rgb(80, 79, 79);
+                transition: background-color 0.3s, color 0.3s;
+                z-index:2;
+            }
+            .bouton2 {
+                display:inline-block;
+                position: absolute;
+                top:15px;
+                right:160px;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                border: 2px solid #ffffff;
+                border-radius: 5px;
+                color: #ffffff;
+                background-color: rgb(80, 79, 79);
+                transition: background-color 0.3s, color 0.3s;
+                z-index:2;
+            }
+            .bouton3{
+                display:inline-block;
+                position: absolute;
+                top:15px;
+                right:100px;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                border: 2px solid #ffffff;
+                border-radius: 5px;
+                color: #ffffff;
+                background-color: rgb(80, 79, 79);
+                transition: background-color 0.3s, color 0.3s;
+                z-index:2;
+            }
+            .vertical-line {
+                height: 42px;
+                display:inline-block;
+                position: absolute;
+                top:15px;
+                right:75px;
+                text-align: center;
+                text-decoration: none;
+                border: 0.5px solid #ffffff;
+                z-index:2;
+        }
+        </style>
+    </head>
+    <body>
+        {% if isauth %}
+            <div class="conteneur">
+                <div class="couleur"></div>
+                <a href="/" class="image1" target="_top">
+                    <img src="/static/Logo.png" class="image1">
+                </a>
+                <div class="ligne"></div>
+                <a class="bouton3" href="/logout/" target="_top"> Se déconnecter </button></a>
+                <div class="vertical-line"></div>
+                <a href="/profile/" class="image2" target="_top">
+                    <img src="/static/Profil.png" class="image2">
+                </a>
+            </div>
+        {% else %}
+            <div class="conteneur">
+                <div class="couleur"></div>
+                <a href="/" class="image1" target="_top">
+                    <img src="/static/Logo.png" class="image1">
+                </a>
+                <div class="ligne"></div>
+                <a class="bouton1" href="/login/" target="_top"> Connexion </button></a>
+                <a class="bouton2" href="/register/" target="_top"> S'inscrire </button></a>
+            </div>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ username }}</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        iframe {
+            border: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .body {
+            flex: 1;
+            margin-top: -80px;
+            margin-left: 15px;
+        }
+
+        .footer {
+            height: 250px;
+        }
+        .tableau {
+            border-collapse: separate;
+            border-spacing: 25px;
+            width: 800 px;
+            margin : auto;
+        }
+        .progession0 {
+            height: 40px;
+            background: #4ec9e7;
+            width: {{ data[0][1] }}%;
+        }
+        .progession1 {
+            height: 40px;
+            background: #e2f105a6;
+            width: {{ data[1][1] }}%;
+        }
+        .progession2 {
+            height: 40px;
+            background: #ce0d0da6;
+            width: {{ data[2][1] }}%
+        }
+        .progession3 {
+            height: 40px;
+            background: #1ec40fa6;
+            width: {{ data[3][1] }}%
+        }
+        .progession4 {
+            height: 40px;
+            background: #f00bbea6;
+            width: {{ data[4][1] }}%
+        }
+        .progession5 {
+            height: 40px;
+            background: #ffc400e2;
+            width: {{ data[5][1] }}%
+        }
+        .rectangle {
+            width: 400px;
+            height: 40px;
+        }
+        .encadre {
+            width: 450px; 
+            height: 190px;
+            border: 4px solid rgb(80, 79, 79); 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin: auto;
+            align-items: center;
+            text-align : center;
+        }
+        .encadre table {
+            margin: auto;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 5%;
+            text-align :left;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-decoration: underline;
+        }
+        input[type="submit"] {
+            background-color: rgb(80, 79, 79);
+            color : white;
+            border-radius: 10px;
+            outline: none;
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="/header/" width="100%"></iframe>
+
+    <div class="body">
+        <h1>Bienvenue sur votre profil, {{ username }} ! </h1>
+
+        <h2>Vos résultats :</h2>
+        <table class="tableau">
+            {% for i in range(data|length) %}
+                <tr>
+                    <td>{{ data[i][0] }} :</td>
+                    <td class="rectangle"><div class="progession{{ i }}"></div></td>
+                    <td>{{ data[i][1] }}%</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Changer de mot de passe :</h2>
+
+        {% if badOldPassword %}
+            <span class="error">Vous n'avez pas entré le bon mot de passe actuel !</span>
+        {% elif differentNewPasswords %}
+            <span class="error">Les deux nouveaux mots de passe ne correspondent pas !</span>
+        {% endif %}
+        <div class="encadre">
+            <form action="/profile/" method="POST">
+                <table> 
+                    <tr>
+                        <td><label>Mot de passe actuel : </label></td>
+                        <td><input type="password" name="old-password"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Nouveau mot de passe : </label></td>
+                        <td><input type="password" name="new-password1"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Confirmer ce nouveau mot de passe : </label></td>
+                        <td><input type="password" name="new-password2"/></td>
+                    </tr>
+                </table>
+               <br/>
+                <input type="submit" value="Enregistrer"/>
+            </form>
+        </div>
+        <br> <br>
+    </div>
+
+    <iframe class="footer" src="/footer" width="100%"></iframe>
+</body>
+</html>

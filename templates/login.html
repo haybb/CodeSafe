@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Login</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        iframe {
+            border: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+        }
+        .encadre {
+            width: 450px; 
+            height: 220px;
+            border: 4px solid rgb(80, 79, 79); 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:50%;
+            margin-bottom:50%;
+            position:relative;
+            align-items: center;
+            text-align : center;
+        }
+        .encadre table {
+            margin:0 auto;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 5%;
+            text-align :left;
+        }
+        .encadre input[type="submit"] {
+            background-color: rgb(80, 79, 79);
+            color : white;
+            border-radius: 10px;
+            outline: none;
+            font-size:14px;
+        }
+        .encadre h1 {
+            margin:0;
+            color:rgb(80, 79, 79);
+        }
+        .body {
+            flex: 1;
+            margin-top: -80px;
+            margin-left: 15px;
+        }
+        .footer {
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="/header/" width="100%"></iframe>
+
+    <div class="body">
+        <div class="encadre">
+            <h1> CONNEXION </h1> <br>
+            {% if badCredentials %}
+                <span class="error">Mauvais pseudo et/ou mot de passe !</span>
+            {% endif %}
+
+            <form action="/login/" method="POST">
+                <table>
+                    <tr>
+                        <td>Pseudo : </td>
+                        <td><input type="text" name="username"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Mot de passe : </td>
+                        <td><input type="password" name="password"></td>
+                    </tr>
+                </table> <br>
+
+                <input type="submit" value="Se connecter" class="input3">
+            </form>
+        </div>
+    </div>
+
+    <iframe class="footer" src="/footer" width="100%"></iframe>
+</body>
+</html>

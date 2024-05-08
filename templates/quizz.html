@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Quizz</title>
+    <style>
+        iframe {
+            border: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+
+        .encadre {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 10px;
+            width: 300px;
+            height: 150px;
+            text-align: center;
+            background-color:white;
+            border:5px solid rgb(80, 79, 79);
+            margin: 10px;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            vertical-align: middle;
+            transform: rotate(180deg);
+        }
+
+        .triangle-right {
+            border-width: 10px 17.32px 10px 0; 
+            border-color: transparent rgb(80, 79, 79) transparent transparent;
+            margin-left: 25px;
+        }
+
+        .question1 {
+            color:rgb(80, 79, 79);
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right : 40px;
+        }
+
+        .question2 {
+            color:rgb(80, 79, 79);
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            align-items: center;
+            text-align:center;
+        }
+
+        .container{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .body {
+            flex: 1;
+            margin-top: -80px;
+        }
+
+        .texte{
+            color: rgb(80, 79, 79);
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            background-color: rgb(80, 79, 79);
+            color : white;
+            border-radius: 10px;
+            outline: none;
+            font-size:18px;
+            width: 100px;
+            height: 50px;
+        }
+
+        h1{
+            font-size:40px;
+            text-decoration: underline;
+            color:rgb(80, 79, 79);
+        }
+
+        .footer {
+            height: 250px;
+        }
+
+        .bonne-reponse {
+            color: green;
+            font-weight: bold;
+            font-size:16px;
+            vertical-align: middle;
+        }
+
+        .mauvaise-reponse {
+            color: red;
+            font-weight: bold;
+            font-size:16px;
+            vertical-align: middle;
+        }
+
+        .encadre-bonne-reponse {
+            border: 5px solid green !important;
+        }
+
+        .encadre-mauvaise-reponse {
+            border: 5px solid red  !important;
+        }
+
+        .radio-bonne-reponse {
+            accent-color: green;
+        }
+
+        input[type='radio'].radio-bonne-reponse {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            border: 0.5px solid rgb(186, 186, 186);
+            background-color: white ;
+        }
+
+        input[type="radio"].radio-bonne-reponse:checked {
+            border: 4px solid rgb(13, 122, 255);
+        }
+
+        input[type="radio"].radio-mauvaise-reponse {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background-color: white ;
+            border: 0.5px solid rgb(186, 186, 186);
+        }
+
+        input[type="radio"].radio-mauvaise-reponse:checked {
+            border: 4px solid rgb(13, 122, 255);
+        }
+
+        .save-me {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="/header/" width="100%"></iframe>
+
+    <div class="body">
+        <h1>Quizz</h1>   
+        {% if current_question %}
+            <form method='post' action="/quizz/{{ categorie }}?question_index={{ question_index }}">
+                <div class="container">
+                    {% if not user_response is defined %}
+                        <p class="question1">{{ current_question[0] }}</p>
+                    {% else %}
+                        <p class="question2">{{ current_question[0] }}</p>
+                    {% endif %} 
+                    {% if not user_response is defined %}
+                        <a href="{{ url_for('quizz', question_index = question_index + 1, categorie = categorie) }}" class="triangle triangle-right" id="lienQuizz" style="display: none;"></a>
+                    {% else %}
+                        <a href="{{ url_for('quizz', question_index = question_index + 1, categorie = categorie) }}" class="triangle triangle-right" id="lienQuizz"></a>
+                    {% endif %}                   
+                
+                </div>
+            
+                <div class="save-me">
+                    <table>
+                        <tr>
+                            {% for reponse in current_question[1] %}
+                                <td>
+                                    {% if user_response and reponse == correct_answer %}
+                                        <div class="encadre encadre-bonne-reponse">
+                                            <div>
+                                                {% if user_response == reponse %}
+                                                    <input class="radio-bonne-reponse" type="radio" name="reponse" value="{{ reponse }}" checked/>
+                                                {% else %}
+                                                    <input class="radio-bonne-reponse" type="radio" name="reponse" value="{{ reponse }}"/>
+                                                {% endif %}
+                                                <label class="bonne-reponse">{{ reponse }}</label>
+                                            </div>
+                                        </div>
+                                    {% elif user_response %}
+                                        <div class="encadre encadre-mauvaise-reponse">
+                                            <div>
+                                                {% if user_response == reponse %}
+                                                    <input class="radio-mauvaise-reponse" type="radio" name="reponse" value="{{ reponse }}" checked/>
+                                                {% else %}
+                                                    <input class="radio-mauvaise-reponse" type="radio" name="reponse" value="{{ reponse }}"/>
+                                                {% endif %}
+                                                <label class="mauvaise-reponse">{{ reponse }}</label>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="encadre">
+                                            <div>
+                                                <input  type="radio" name="reponse" value="{{ reponse }}">
+                                                <label class="texte">{{ reponse }}</label>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                {% if loop.index == 2 %}
+                                    </tr><tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </div>
+                {% if not user_response is defined %}
+                    <input type='submit' id="Valider" value='Valider'>
+                {% endif %}
+                
+                
+            </form>
+        {% else %}
+            <p>Fin du quizz.</p>
+            <p>Pourcentage de réussite pour cette catégorie : {{ (count / nb_rep * 100) | round(2)}} %</p>
+            <a href="{{ url_for('index') }}">Retour à l'accueil.</a>
+        {% endif %}
+    </div>
+    <br>
+    <iframe class="footer" src="/footer" width="100%"></iframe>
+    
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Styles spécifiques pour l'input de type radio */
+        input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px; /* Ajustez la taille du cercle selon vos besoins */
+            height: 20px; /* Ajustez la taille du cercle selon vos besoins */
+            border: 2px solid #ff0000; /* Remplacez #ff0000 par la couleur de votre choix */
+            border-radius: 50%;
+            outline: none;
+            margin-right: 5px; /* Espacement entre les boutons radio */
+        }
+
+        input[type="radio"]:checked {
+            background-color: #ff0000; /* Remplacez #ff0000 par la couleur de votre choix */
+        }
+
+        /* Styles supplémentaires pour améliorer l'apparence */
+        label {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Changer la couleur d'un input radio</title>
+</head>
+<body>
+    <label for="option1">Option 1</label>
+    <input type="radio" id="option1" name="options">
+
+    <label for="option2">Option 2</label>
+    <input type="radio" id="option2" name="options">
+
+    <!-- Ajoutez d'autres options si nécessaire -->
+
+</body>
+</html>

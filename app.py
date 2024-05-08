@@ -2,10 +2,11 @@ from flask import Flask, render_template, redirect, request, make_response
 from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
 from flask_bcrypt import Bcrypt
 import sqlite3
+import os
 
 # Initialisation
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "MySuperSecretKey"
+app.config['SECRET_KEY'] = os.urandom(24)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 

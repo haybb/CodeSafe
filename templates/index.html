@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bouton-lien {
+            white-space: normal;
+            overflow-wrap: break-word;
+            margin: 25px 28px;
+            border: 5px solid rgb(80, 79, 79);
+            padding: 1px 1px;
+            box-sizing: border-box;
+            display: inline-block;
+            background-color: white;
+            color: rgb(80, 79, 79);
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 80px;
+            font-size: 16px;
+            text-transform: uppercase;
+            height: 160px;
+            width: 300px;
+            transition: background-color 0.3s ease;
+            }
+        .bouton-lien:hover {
+            background-color: rgb(204, 204, 204);
+        }
+
+        iframe {
+            border: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .body {
+            flex: 1;
+            margin-top: -80px;
+            margin-left: 15px;
+        }
+        .image-0{
+            width:50%;
+            height:auto;
+            vertical-align: middle;
+            padding:0px;
+        }
+        .image-1{
+            width:22%;
+            height:auto;
+            vertical-align: middle;
+            margin-top:10px;
+            padding:0px;
+        }
+        .image-2{
+            width:30%;
+            height:auto;
+            vertical-align: middle;
+            margin-top:10px;
+            padding:0px;
+        }
+        .image-3{
+            width:23%;
+            height:auto;
+            vertical-align: middle;
+            margin-top:10px;
+            padding:0px;
+        }
+        .image-4{
+            width:30%;
+            height:auto;
+            vertical-align: middle;
+            margin-top:10px;
+            padding:0px;
+        }
+        .image-5{
+            width:30%;
+            height:auto;
+            vertical-align: middle;
+            margin-top:10px;
+            padding:0px;
+        }
+        .footer {
+            height: 250px;
+            margin-top:10%;
+        }
+        table {
+            margin : auto;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="/header/" width="100%"></iframe>
+
+    <div class="body">
+        <table>
+            <tr>
+                {% for i in range(bd|length) %}
+                        <td>
+                            <a href="/quizz/{{ bd[i][0] }}" class="bouton-lien bouton-lien-{{ i }}">
+                                <img src="static/image-{{i}}.png" class="image-{{i}}"> <br>
+                                {{ bd[i][1] }}
+                            </a>
+                        </td>
+                    {% if i%2 %}
+                        </tr>
+                        <tr>
+                    {% endif %}
+                {% endfor %}   
+        </table>
+    </div>
+
+    <iframe class="footer" src="/footer" width="100%"></iframe>
+
+    <script>
+        // Permet de mettre à la ligne automatiquement 
+        window.onload = function () {
+            adjustPageWidth();
+        };
+
+        function adjustPageWidth() {
+            var iframe = document.getElementById('myIframe');
+            var iframeWidth = iframe.clientWidth + 'px';
+            document.body.style.width = iframeWidth;
+        }
+
+        window.onresize = function () {
+            adjustPageWidth();
+        };
+    </script>
+    
+</body>
+</html>
